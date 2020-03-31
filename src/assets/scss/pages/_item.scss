@@ -1,0 +1,93 @@
+.productDetail_pic {
+    img {
+        width: 100%;
+    }
+    .discount {
+        width: 25%;
+    }
+}
+
+.background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $darkGray;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+}
+
+.productDetail {
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    z-index: 9;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    .colorBox {
+        position: relative;
+        background-color: $yellow;
+        padding: 50px 10%;
+    }
+    .delete {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: $font-3xl;
+        margin-right: 15px;
+        color: $lightGray;
+        cursor: pointer;
+    }
+    .delete:hover {
+        font-weight: 900;
+    }
+    .product_name {
+        font-size: $font-xl;
+        border-left: 8px solid $cyan;
+        padding-left: 16px;
+    }
+    .product_description {
+        font-size: $font-s;
+        color: $lightGray;
+        margin: 20px 0;
+    }
+    span {
+        font-size: $font-l;
+    }
+    .buy {
+        @include btnType(transparent, $font-l, $cyan);
+        position: relative;
+    }
+    .bought {
+        display: none;
+        font-size: $font-s;
+        background-color: $orange;
+        color: $darkWhite;
+        position: absolute;
+        padding: 5px 10px;
+        border-radius: 3px;
+        top: -38px;
+        width: 70px;
+        text-align: center;
+    }
+    .bought::after {
+        display: block;
+        position: absolute;
+        content: "▼";
+        color: $orange;
+        left: 0;
+        bottom: -14px;
+    }
+}
+
+//開關商品,背景動畫
+.openItem.background {
+    display: block;
+    opacity: .7;
+}
+
+.openItem.productDetail {
+    top: 50%;
+}

@@ -1,0 +1,36 @@
+//config
+@import './config/variables';
+@import './config/reset';
+@import './config/reboot';
+@import './config/typography';
+//Bootstrap
+//Required
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+//Optional
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/carousel';
+//helper
+@import './helper/display';
+//element
+@import './element/button';
+//module
+@import './module/list';
+@import './module/step';
+//components //layout
+@import './components/layout/header';
+@import './components/layout/footer';
+@import './components/layout/productMenu';
+@import './components/alert';
+@import './components/loading';
+//pages
+@import './pages/home';
+@import './pages/login';
+@import './pages/itemList';
+@import './pages/item';
+@import './pages/cart';
+@import './pages/checkout';
+@import './pages/orderCompleted';
+// //
+@import './browser';

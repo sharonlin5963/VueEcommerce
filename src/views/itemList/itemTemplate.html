@@ -1,0 +1,55 @@
+<div class="product max-1600">
+    <div class="row">
+        <ProductMenu @pathChange="pathHandler" />
+        <div class="col col-lg-9 col-12">
+            <div class="productPath">首頁 > {{path.itemClass}}</div>
+            <div class="row">
+                <div class="col col-6 col-xl-4" v-for="(item,index) in newItems" :key="index">
+                    <div class="product_box" :class="(item.isDiscount)?'isSale':''">
+                        <div @click="openItem(index)">
+                            <img :src="require('../../assets/img/'+item.img_name+'.png')" alt="" />
+                            <div class="discount h-flexCenter">
+                                <img src="../../assets/img/discount_bg.svg" alt="" />
+                                <div>{{100-item.discount*100}}% off</div>
+                            </div>
+                            <div class="product_name">{{item.name}}</div>
+                            <span class="product_price">NT.{{item.price}}</span>
+                            <span class="product_salePrice">NT.{{Math.round(item.price*item.discount)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="background" @click="closeItem()"></div>
+    <div class="productDetail" :class="(nowItem.isDiscount)?'isSale':''">
+        <div class="colorBox">
+            <div class="delete" @click="closeItem()">×</div>
+            <div class="row">
+                <div class="productDetail_pic col col-12 col-lg-7">
+                    <img :src="require('../../assets/img/'+nowItem.img_name+'.png')" alt="" />
+                    <div class="discount h-flexCenter">
+                        <img src="../../assets/img/discount_bg.svg" alt="" />
+                        <div>{{100-nowItem.discount*100}}% off</div>
+                    </div>
+                </div>
+                <div class="col col-12 col-lg-5">
+                    <div class="product_name">{{nowItem.name}}</div>
+                    <div class="product_description">{{nowItem.description}}</div>
+                    <span class="product_price">NT.{{nowItem.price}}</span>
+                    <span class="product_salePrice">NT.{{Math.round(nowItem.price*nowItem.discount)}}</span>
+                    <hr/>
+                    <div class="quantity">
+                        <div class="symbol" @click="calculate(-1)">-</div>
+                        <input class="value" type="text" v-model="itemQuantity" />
+                        <div class="symbol" @click="calculate(1)">+</div>
+                    </div>
+                    <div class="e-btn buy" @click="addItem(nowItem.id)">加入購物車
+                        <div class="bought">已加入</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <Loading v-if="(loading)" />
+</div>

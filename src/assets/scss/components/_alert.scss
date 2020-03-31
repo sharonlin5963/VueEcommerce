@@ -1,0 +1,23 @@
+.alert {
+    position: fixed;
+    background-color: lighten($lightGray, 10);
+    padding: 50px 10%;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 9;
+    left: 50%;
+    transform: translateX(-50%);
+    div {
+        color: $darkWhite;
+        font-size: $font-l;
+        margin-bottom: 20px;
+    }
+    .e-btn {
+        @include btnType($yellow, $font-s, $cyan);
+        padding: 8px;
+        color: $lightGray;
+    }
+    .e-btn:hover {
+        color: $darkWhite;
+    }
+}
