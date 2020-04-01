@@ -36,10 +36,10 @@ export default {
   },
   methods:{
     login(){
-      var account = $('#account')
-      var password = $('#password')
-      var emailReg = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})*$/;
-      var passwordReg = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+      let account = $('#account')
+      let password = $('#password')
+      let emailReg = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})*$/;
+      let passwordReg = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
       // 至少1個小寫英文字母，(?=.*?[a-z])
       // 至少1位數字，(?=.*?[0-9])
       // 最小8個長度.{8,}
