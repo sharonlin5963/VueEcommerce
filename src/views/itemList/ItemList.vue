@@ -26,7 +26,7 @@ export default {
         price: 599,
         isDiscount: false,
         discount: 0.85,
-        img_name: 'clock/_clock_01'
+        img_name: 'clock/clock_01'
       },
       itemQuantity: 1,
       totalItem:'',
