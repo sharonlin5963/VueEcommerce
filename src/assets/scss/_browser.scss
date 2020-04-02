@@ -27,6 +27,14 @@
             font-size: $font-s;
         }
     }
+    //cart list orderCompleted productDetail 行動版取消hover
+    .shopList_item .delete:hover,
+    .m-list .nextBtn .e-btn:hover,
+    .orderCompleted .e-btn:hover,
+    .productDetail .buy:hover {
+        background-color: transparent;
+        color: $lightGray;
+    }
 }
 
 @media (Max-width: 991px) {

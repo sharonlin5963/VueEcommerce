@@ -22,7 +22,7 @@
               </div>
               <div class="quantity">
                 <div class="symbol" @click="calculate(-1,index)">-</div>
-                <input class="value" disabled="disabled" type="text" :data-id="index" v-model="item.quantity"/>
+                <div class="value">{{item.quantity}}</div>
                 <div class="symbol" @click="calculate(1,index)">+</div>
               </div>
             </div>

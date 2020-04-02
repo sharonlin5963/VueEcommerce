@@ -13,10 +13,6 @@
     color: $lightGray;
     padding: 10px 0;
     cursor: pointer;
-    &:hover {
-        color: $darkWhite;
-        border: none;
-    }
 }
 
 .quantity {
@@ -35,18 +31,21 @@
         border-radius: 5px;
         cursor: pointer;
     }
-    .symbol:hover {
-        background-color: $cyan;
-        color: $darkWhite;
-    }
     .value {
         width: 50px;
         border: none;
         background: transparent;
-        z-index: 9;
     }
-    input:disabled {
-        color: $lightGray;
-        opacity: 1;
+}
+
+//在大螢幕才有hover
+@media (min-width: 1025px) {
+    .e-btn:hover {
+        color: $darkWhite;
+        border: none;
+    }
+    .quantity .symbol:hover {
+        background-color: $cyan;
+        color: $darkWhite;
     }
 }
