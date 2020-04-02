@@ -276,18 +276,13 @@
         .item_pic {
             width: 40%;
         }
+        input {
+            z-index: 9;
+        }
     }
     .shopList .quantity {
         display: block;
         position: static;
-        .value,
-        .symbol {
-            width: 25px;
-        }
-        .symbol:hover {
-            background-color: $darkWhite;
-            color: $darkGray;
-        }
     }
     //_checkout
     .list-check {
