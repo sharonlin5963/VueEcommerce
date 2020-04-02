@@ -43,5 +43,10 @@
         width: 50px;
         border: none;
         background: transparent;
+        z-index: 9;
+    }
+    input:disabled {
+        color: $lightGray;
+        opacity: 1;
     }
 }
