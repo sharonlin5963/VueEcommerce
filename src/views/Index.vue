@@ -30,17 +30,17 @@
             <router-link :to="{name:'ItemList'}" 
                          @click.native="goTop()"
                          class="col col-lg-4 col-12" href="#">
-              <div class="pic"><img class="blanket" src="../assets/img/home/home-sec2-blanket.jpg" alt="blanket"/></div>
+              <div class="pic"><img src="../assets/img/home/home-sec2-blanket.jpg" alt="blanket"/></div>
               <div class="productName">芥黃米白灰撞色拼接針織毯</div></router-link>
             <router-link :to="{name:'ItemList'}" 
                          @click.native="goTop()"
                          class="col col-lg-4 col-12" href="#">
-              <div class="pic"><img class="vase" src="../assets/img/home/home-sec2-vase.jpg" alt="vase"/></div>
+              <div class="pic"><img src="../assets/img/home/home-sec2-vase.jpg" alt="vase"/></div>
               <div class="productName">陶製小可愛圓圓虎紋小器</div></router-link>
             <router-link :to="{name:'ItemList'}" 
                          @click.native="goTop()"
                          class="col col-lg-4 col-12" href="#">
-              <div class="pic"><img class="pillow" src="../assets/img/home/home-sec2-pillow.jpg" alt="pillow"/></div>
+              <div class="pic"><img src="../assets/img/home/home-sec2-pillow.jpg" alt="pillow"/></div>
               <div class="productName">Oh deer!我親愛的梅花鹿抱枕</div></router-link>
           </div>
         </div>
