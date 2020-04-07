@@ -34,6 +34,5 @@
 
 ## 作品介紹
 
-## 【首頁】
-### 
-![Alt text](/src/assets/img/home/home-sec1-pic.jpg)
+### 【首頁】
+![Alt text](/src/assets/img/home/home-sec1-text-sm.png)
