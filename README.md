@@ -2,7 +2,8 @@
 * [DEMO](https://sharonlin5963.github.io/VueEcommerce/#/)
 
 # 簡介
-### 以 Vue.js練習開發SPA電商網頁。
+### 
+以 Vue.js練習開發SPA電商網頁。
 
 # 網頁架構
 ### 
