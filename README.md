@@ -1,4 +1,6 @@
-# jailulu
+# 【Jailulu 宅家飾】電商網站
+```
+[DEMO]: https://sharonlin5963.github.io/VueEcommerce/#/       "DEMO"
 
 ## Project setup
 ```
