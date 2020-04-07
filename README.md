@@ -35,4 +35,20 @@
 ## 作品介紹
 
 ### 【首頁】
+<<<<<<< HEAD
 ![Alt text](/src/assets/img/home/home-sec1-text-sm.png)
+=======
+![Alt text](/src/static/index.png)
+
+### 【產品列表】
+![Alt text](/src/static/itemList.png)
+
+### 【產品細節】
+![Alt text](/src/static/item.png)
+
+### 【購物車】
+![Alt text](/src/static/cart.png)
+
+### 【會員登入】
+![Alt text](/src/static/login.png)
+>>>>>>> e9de8d5... 上傳README.md圖片
