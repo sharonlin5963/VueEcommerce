@@ -15,3 +15,25 @@
 * 結帳系統
 * 會員登入
   * 帳號密碼驗證
+  
+## 使用技術
+###
+* Vue.js
+* Vue CLI
+* JavaScript ( ES6 )
+* jQuery
+* Scss
+* Bootstrap 4 + RWD 製作響應式網頁
+* Json-seerver + Heroku 開發 API
+
+## 使用套件
+###
+* vue-axios 串接API
+* Bootstrap 4
+* Font Awesome
+
+## 作品介紹
+
+## 【首頁】
+### 
+![Alt text](/src/assets/img/home/home-sec1-pic.jpg)
