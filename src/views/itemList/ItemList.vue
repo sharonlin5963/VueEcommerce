@@ -63,11 +63,13 @@ export default {
     //點擊打開商品
     openItem(idx){
       this.nowItem=this.newItems[idx];
-      $('.productDetail,.background').addClass('openItem');
+      $('.background').addClass('openItem');
+      $('.productDetail').css('top','50%');
     },
     //點擊關閉商品
     closeItem(){
-      $('.productDetail,.background').removeClass('openItem');
+      $('.background').removeClass('openItem');
+      $('.productDetail').css('top','-50%');
       this.itemQuantity=1;
     },
     //加入購物車
