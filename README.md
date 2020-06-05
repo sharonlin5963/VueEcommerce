@@ -21,10 +21,9 @@
 * Vue.js
 * Vue CLI
 * JavaScript ( ES6 )
-* jQuery
 * Scss
 * Bootstrap 4 + RWD 製作響應式網頁
-* Json-seerver + Heroku 開發 API
+* Json-server + Heroku 開發 API
 
 ## 使用套件
 ###

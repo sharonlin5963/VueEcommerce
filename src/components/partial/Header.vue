@@ -1,7 +1,7 @@
 <template>
   <div id="nav" class="header">
       <div class="navbar max-1600">
-        <div class="nav_toggle nav-item nav_bar" @click="navMenu()">≡</div>
+        <div class="nav_toggle nav-item nav_bar" @click="menuOpen=!menuOpen;">{{(menuOpen)?'×':'≡'}}</div>
         <div class="navbar-brand">
           <router-link to="/">
             <img src="@/assets/img/jailuluLogo_light.svg" alt="宅家飾jailulu logo"/>
@@ -13,16 +13,16 @@
             <font-awesome-icon :icon="['fas','shopping-cart']"></font-awesome-icon>
           </router-link>
         </div>
-        <div class="nav-menu">
+        <div class="nav-menu" :class="(menuOpen)?'menuOpen':''">
           <div class="nav-item">
             <router-link to="/">首頁</router-link>
           </div>
-          <div class="nav-item productList">
-            <a class="allItem" @click="listOpen()">商品列表</a>
+          <div class="nav-item productList" :class="(allListOpen)?'allListOpen':`${(allItemOpen)?'allItemOpen':''}`" @mouseover="(!menuOpen)?allItemOpen=true:''" @mouseout="allItemOpen=false">
+            <a class="allItem" @click="listOpen()">商品列表{{(menuOpen)?`${(allListOpen)?'-':'+'}`:''}}</a>
             <ul>
               <div class="triangle triDown">▾</div>
               <li><router-link :to="{name:'ItemList'}" @click.native="pathChangeClick('all')">商品總覽</router-link></li>
-              <li class="dropdown" id="homeDecoration">
+              <li class="dropdown" id="homeDecoration" :class="(homeDecorationOpen)?'dropdownOpen':''" @mouseover="(!menuOpen)?homeDecorationOpen=true:''" @mouseout="homeDecorationOpen=false">
                 <div class="triangle triRight">▸</div>
                 <router-link class="type" :to="{name:'ItemList-homeDecoration'}" @click.native="pathChangeClick('homeDecoration')">家具擺設</router-link>
                 <ul class="productItem">
@@ -32,7 +32,7 @@
                   <li><router-link :to="{name:'ItemList-pillow'}" @click.native="pathChangeClick('pillow')">抱枕</router-link></li>
                 </ul>
               </li>
-              <li class="dropdown" id="light">
+              <li class="dropdown" id="light" :class="(lightOpen)?'dropdownOpen':''" @mouseover="(!menuOpen)?lightOpen=true:''" @mouseout="lightOpen=false">
                 <div class="triangle triRight">▸</div>
                 <router-link class="type" :to="{name:'ItemList-lighting'}" @click.native="pathChangeClick('lighting')">照明</router-link>
                 <ul class="productItem">
@@ -46,7 +46,7 @@
             <router-link :to="{name:'ItemList-sale'}" @click.native="pathChangeClick('sale')">sale</router-link>
           </div>
           <div class="nav_member nav-item nav-font">
-            <router-link :to="{name:'Login'}">
+            <router-link :to="{name:'Login'}">{{(menuOpen)?'會員登入':""}}
               <font-awesome-icon :icon="['fas','user-circle']"></font-awesome-icon>
             </router-link>
           </div>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="fixBtn h-flexCenter" @click="goTop">
+      <div v-show="fixBtn" class="fixBtn h-flexCenter" @click="goTop">
           <font-awesome-icon :icon="['fas','caret-up']"></font-awesome-icon>
       </div>
       <Loading v-if="(loading)"/>
@@ -76,7 +76,13 @@ export default {
   data(){
     return {
       total:'',
-      loading:false
+      loading:false,
+      fixBtn:false,
+      menuOpen:false,
+      allListOpen:false,
+      allItemOpen:false,
+      homeDecorationOpen:false,
+      lightOpen:false
     }
   },
   created(){
@@ -91,58 +97,27 @@ export default {
     })
   },
   mounted(){
-    //fixBtn顯示隱藏
-    $(window).scroll(function() {
-        if ($(window).scrollTop() > 0) return $('.fixBtn').css('display', 'flex');
-        $('.fixBtn').hide()
+    // fixBtn顯示隱藏
+    $(window).scroll(()=> {
+        if ($(window).scrollTop() > 0) return this.fixBtn=true;
+        this.fixBtn=false;
     })
-    //商品列表開啟關閉(mouseEnter)
-    this.btnOpen('.productList', 'allItemOpen');
-    this.btnOpen('#homeDecoration', 'dropdownOpen');
-    this.btnOpen('#light', 'dropdownOpen');
   },
   methods:{
-    //商品列表開啟關閉Fn(mouseEnter)
-    btnOpen(target, btnClass){
-        $(target).mouseenter(function() {
-            if (!$('.nav-menu').hasClass('menuOpen')) return $(target).addClass(btnClass);
-        })
-        $(target).mouseleave(function() {
-            $(target).removeClass(btnClass);
-        })
-    },
     //.fixBtn
     goTop(){
       $('body,html').stop().animate({ scrollTop: 0 });
     },
-    // ≡ 商品目錄開啟
-    navMenu(){
-      $('.nav-menu').toggleClass('menuOpen');
-
-        if ($('.nav-menu').hasClass('menuOpen')) {
-            $('.nav_member a').html('會員登入');
-            $('.nav_bar').html('×');
-            $('.allItem').html('商品列表+');
-            return;
-        }
-        $('.nav_bar').html('≡');
-    },
     //商品列表.productList open
     listOpen(){
-      if($('.nav-menu').hasClass('menuOpen')){
-        $('.productList').toggleClass('allListOpen');
-        if($('.productList').hasClass('allListOpen'))return $('.allItem').html('商品列表-');
-        return $('.allItem').html('商品列表+');
-      }
-      return this.$router.push({name: 'ItemList'});
-      
+      if(this.menuOpen)return this.allListOpen=!this.allListOpen;
+      this.$router.push({name: 'ItemList'});
     },
     //傳遞資料到父層Home
     pathChangeClick(value){
       this.$emit('pathChange',value);
-      $('.nav-menu').removeClass('menuOpen');
-      $('.productList').removeClass('allListOpen');
-      $('.nav_bar').html('≡');
+      this.menuOpen=false;
+      this.allListOpen=false;
     },
     //接收父層Home資料Home更改total
     getTotal(val){

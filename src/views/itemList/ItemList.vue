@@ -30,7 +30,8 @@ export default {
       },
       itemQuantity: 1,
       totalItem:'',
-      loading:false
+      loading:false,
+      itemOpen:false
     }
   },
   created(){
@@ -63,13 +64,11 @@ export default {
     //點擊打開商品
     openItem(idx){
       this.nowItem=this.newItems[idx];
-      $('.background').addClass('openItem');
-      $('.productDetail').css('top','50%');
+      this.itemOpen=true;
     },
     //點擊關閉商品
     closeItem(){
-      $('.background').removeClass('openItem');
-      $('.productDetail').css('top','-50%');
+      this.itemOpen=false;
       this.itemQuantity=1;
     },
     //加入購物車

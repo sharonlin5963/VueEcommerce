@@ -36,7 +36,7 @@
             <span class="totalPrice">  NT.{{addTotalPrice}}</span>
           </div>
           <div class="nextBtn">
-            <div class="e-btn goCheckout" @click="checkOut()">下一步</div>
+            <div class="e-btn goCheckout" @click="nextStep()">下一步</div>
           </div>
         </div>
       </div>
@@ -44,34 +44,34 @@
         <div class="title">訂單資訊</div>
         <div class="orderInfo_info">
           <div class="row">
-            <div class="col col-md-6 col-12 orderInfo_title checkName">姓名
+            <div :class="(check.name)?'fail':''" class="col col-md-6 col-12 orderInfo_title">姓名
               <div class="failState">*此為必填問題</div>
               <br/>
-              <input type="text"/>
+              <input @blur="checkHandler('name')" v-model="customerInfo.name" type="text"/>
             </div>
-            <div class="col col-md-6 col-12 orderInfo_title checkPhone">聯絡電話
+            <div :class="(check.phone)?'fail':''" class="col col-md-6 col-12 orderInfo_title ">聯絡電話
               <div class="failState">*電話必須為10位數字</div>
               <br/>
-              <input type="text"/>
+              <input @blur="checkHandler('phone')" v-model="customerInfo.phone" type="text"/>
             </div>
           </div>
-          <div class="orderInfo_title checkAddr">收件地址
+          <div :class="(check.addr)?'fail':''" class="orderInfo_title">收件地址
             <div class="failState">*此為必填問題</div>
             <br/>
-            <input type="text"/>
+            <input @blur="checkHandler('addr')" v-model="customerInfo.addr" type="text"/>
           </div>
-          <div class="orderInfo_title checkMail">郵件地址
+          <div :class="(check.mail)?'fail':''" class="orderInfo_title">郵件地址
             <div class="failState">*請輸入正確的Email格式</div>
             <br/>
-            <input type="text"/>
+            <input @blur="checkHandler('mail')" v-model="customerInfo.mail" type="text"/>
           </div>
           <div class="orderInfo_title">備註
             <br/>
-            <textarea name="text"></textarea>
+            <textarea v-model="customerInfo.remark" name="text"></textarea>
           </div>
         </div>
         <div class="nextBtn">
-          <div @click="checkout()" class="e-btn">結帳</div>
+          <div @click="checkOut()" class="e-btn">結帳</div>
         </div>
       </div>
     </div>
@@ -104,7 +104,21 @@ export default {
         btnMsg:'去逛逛'
       },
       number:'',
-      loading:false
+      loading:false,
+      customerInfo:{
+        name:'',
+        phone:'',
+        addr:'',
+        mail:'',
+        remark:''
+      },
+      check:{
+        name:false,
+        phone:false,
+        addr:false,
+        mail:false
+      },
+      checkOff:false
     }
   },
   created(){
@@ -120,7 +134,7 @@ export default {
   },
   methods:{
     //下一步按鍵
-    checkOut(){
+    nextStep(){
       let scrollTop = $('.orderInfo').offset().top
       $('body,html').stop().animate({ scrollTop: scrollTop });
     },
@@ -156,34 +170,36 @@ export default {
       })
     },
     //結帳
-    checkout(){
+    checkHandler(val){
       if(this.cartList.length===0)return this.alert.open=true;
-      let input=$('.orderInfo_title input');
-      let textarea=$('.orderInfo_title textarea');
-      let inputArr=[];
 
-      for(let i=0;i<input.length;i++){
-        inputArr.push(input[i].value);
-      }
-      //檢查資料
+      let {name,phone,addr,mail}=this.customerInfo;
       let phoneReg = /^0[0-9]{9}$/;
       let emailReg = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})*$/;
-      //checkName
-      if (inputArr[0]==='') $('.checkName').addClass('fail');
-      if (inputArr[0]!=='') $('.checkName').removeClass('fail');
-      //checkAddr
-      if (inputArr[2]==='') $('.checkAddr').addClass('fail');
-      if (inputArr[2]!=='') $('.checkAddr').removeClass('fail');
-      //checkPhone
-      if (!phoneReg.test(inputArr[1])) $('.checkPhone').addClass('fail');
-      if (phoneReg.test(inputArr[1])) $('.checkPhone').removeClass('fail');
-      //checkMail
-      if (!emailReg.test(inputArr[3]) || inputArr[3]==='')return $('.checkMail').addClass('fail');
-      $('.checkMail').removeClass('fail');
-      //傳送資料到api
+      if(val==='name'){
+        if(!name) return this.check.name=true;
+        this.check.name=false;
+      }
+      if(val==='addr'){
+      if(!addr)return this.check.addr=true;
+      this.check.addr=false;
+      }
+      if(val==='phone'){
+      if(!phoneReg.test(phone))return this.check.phone=true;
+      this.check.phone=false;
+      }
+      if(val==='mail'){
+      if(!mail||!emailReg.test(mail))return this.check.mail=true;
+      this.check.mail=false;
+      }
+    },
+    checkOut(){
+      let checkArr=Object.values(this.check);
+      let orderList=Object.values(this.customerInfo);
+
+      if(checkArr.every(item=>item===false)){
       this.loading=true;
-      let orderList=inputArr.slice(0);
-      orderList.push(textarea.val());
+
       orderList.push(this.addTotalItem);
       orderList.push(this.addTotalPrice);
 
@@ -193,9 +209,8 @@ export default {
       }).catch((err)=>{
         console.log(err);
       })
+
       //確定資料 到下一頁
-      let check=$('.orderInfo_title').hasClass('fail');
-      if(!check){
         $('body,html').scrollTop(0);
         this.$router.push({name: 'Cart-checkout'});
       }

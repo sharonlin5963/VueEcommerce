@@ -21,9 +21,9 @@
             </div>
         </div>
     </div>
-    <div class="background" @click="closeItem()"></div>
-    <div class="productDetail" :class="(nowItem.isDiscount)?'isSale':''">
-        <div class="colorBox">
+    <div class="background" :class="(itemOpen)?'openItem':''" @click="closeItem()"></div>
+    <div class="productDetail" :class="(itemOpen)?'openItem':''">
+        <div class="colorBox" :class="(nowItem.isDiscount)?'isSale':''">
             <div class="delete" @click="closeItem()">×</div>
             <div class="row">
                 <div class="productDetail_pic col col-12 col-lg-7">
