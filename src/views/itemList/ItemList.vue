@@ -135,17 +135,19 @@ export default {
       this.path.text=pathText;
     },
     'path.text':function(){
-      if (this.path.text === 'all') return this.path.itemClass='商品總覽';
-      if (this.path.text === 'sale') return this.path.itemClass='sale';
-      if (this.path.text === 'homeDecoration') return this.path.itemClass='家具擺設';
-      if (this.path.text === 'clock') return this.path.itemClass='時鐘';
-      if (this.path.text === 'vase') return this.path.itemClass='花器';
-      if (this.path.text === 'blanket') return this.path.itemClass='毛毯';
-      if (this.path.text === 'pillow') return this.path.itemClass='抱枕';
-      if (this.path.text === 'lighting') return this.path.itemClass='照明';
-      if (this.path.text === 'light') return this.path.itemClass='燈泡';
-      if (this.path.text === 'lampshade') return this.path.itemClass='燈罩';
-
+      const pathMap = {
+        all: '商品總覽',
+        sale: 'sale',
+        homeDecoration: '家具擺設',
+        clock: '時鐘',
+        vase: '花器',
+        blanket: '毛毯',
+        pillow: '抱枕',
+        lighting: '照明',
+        light: '燈泡',
+        lampshade: '燈罩'
+      };
+      return this.path.itemClass = pathMap[this.path.text];
     },
     totalItem(val){
       //傳遞到Home
